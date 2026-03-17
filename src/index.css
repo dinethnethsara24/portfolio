@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com');
+@import "tailwindcss";
+
+
+@theme {
+  --color-brutal-bg: #FFFFFF;
+  --color-brutal-text: #212121;
+  --color-brutal-border: #000000;
+  --color-brutal-accent-blue: #0055FF;
+  --color-brutal-accent-yellow: #FFE000;
+  --color-brutal-gray: #F4F4F4;
+
+  --color-dark-bg: #33332d;
+  --color-dark-text: #FFFFFF;
+  --color-dark-subtext: #F3F3F3;
+
+  --font-mono: "IBM Plex Mono", "Roboto Mono", "Courier New", monospace;
+  --font-sans: "IBM Plex Mono", "Roboto Mono", "Courier New", monospace;
+
+  --shadow-brutal: 6px 6px 0px #000000;
+  --shadow-brutal-hover: 4px 4px 0px #000000;
+  --shadow-brutal-sm: 4px 4px 0px #000000;
+  --shadow-brutal-sm-hover: 2px 2px 0px #000000;
+  --shadow-brutal-lg: 8px 8px 0px #000000;
+  --shadow-brutal-lg-hover: 12px 12px 0px #000000;
+  --shadow-brutal-xl: 16px 16px 0px #000000;
+
+  --shadow-dark-brutal: 6px 6px 0px #FFFFFF;
+  --shadow-dark-brutal-hover: 4px 4px 0px #FFFFFF;
+  --shadow-dark-brutal-sm: 4px 4px 0px #FFFFFF;
+  --shadow-dark-brutal-sm-hover: 2px 2px 0px #FFFFFF;
+  --shadow-dark-brutal-lg: 8px 8px 0px #FFFFFF;
+  --shadow-dark-brutal-lg-hover: 12px 12px 0px #FFFFFF;
+  --shadow-dark-brutal-xl: 16px 16px 0px #FFFFFF;
+
+  --border-width-brutal: 3px;
+}
+
+@custom-variant dark (&:where(.dark-mode, .dark-mode *));
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  body {
+    @apply bg-brutal-bg dark:bg-dark-bg transition-colors duration-200;
+  }
+}
+
+@layer components {
+
+  /* Neubrutalism Base Styles that are reused frequently */
+  .brutal-border {
+    @apply border-brutal border-brutal-border dark:border-white;
+  }
+
+  .brutal-shadow-btn {
+    position: relative;
+    @apply shadow-brutal dark:shadow-dark-brutal hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-brutal-hover dark:hover:shadow-dark-brutal-hover active:translate-x-[6px] active:translate-y-[6px] active:shadow-none transition-all duration-200;
+  }
+
+  .brutal-shadow-btn::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    z-index: -1;
+  }
+
+  .brutal-shadow-card {
+    position: relative;
+    @apply shadow-brutal-lg dark:shadow-dark-brutal-lg hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lg-hover dark:hover:shadow-dark-brutal-lg-hover transition-all duration-200;
+  }
+
+  .brutal-shadow-card::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    z-index: -1;
+  }
+
+  .hit-area-fix {
+    position: relative;
+  }
+
+  .hit-area-fix::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    z-index: -1;
+  }
+
+  .brutal-input {
+    @apply font-mono bg-white dark:bg-dark-bg text-brutal-text dark:text-dark-text border-brutal border-brutal-border dark:border-white p-3 shadow-brutal-sm dark:shadow-dark-brutal-sm focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-brutal-sm-hover dark:focus:shadow-dark-brutal-sm-hover outline-none transition-all duration-200;
+  }
+
+  .section-container {
+    @apply py-20 px-4 md:px-10 max-w-[1200px] mx-auto min-h-[60vh] flex flex-col justify-center;
+  }
+
+  .section-title {
+    @apply font-mono font-bold text-4xl uppercase border-b-brutal border-brutal-border dark:border-white pb-2 mb-10 inline-block text-brutal-text dark:text-dark-text;
+  }
+}
+
+@layer utilities {
+  .ibm-plex-mono-thin {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 100;
+    font-style: normal;
+  }
+
+  .ibm-plex-mono-extralight {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 200;
+    font-style: normal;
+  }
+
+  .ibm-plex-mono-light {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  .ibm-plex-mono-regular {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .ibm-plex-mono-medium {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .ibm-plex-mono-semibold {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .ibm-plex-mono-bold {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .ibm-plex-mono-thin-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 100;
+    font-style: italic;
+  }
+
+  .ibm-plex-mono-extralight-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 200;
+    font-style: italic;
+  }
+
+  .ibm-plex-mono-light-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .ibm-plex-mono-regular-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .ibm-plex-mono-medium-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .ibm-plex-mono-semibold-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .ibm-plex-mono-bold-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
+    font-style: italic;
+  }
+}
