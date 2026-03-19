@@ -97,11 +97,7 @@ const Projects = () => {
       ),
       tech: ['Java', 'MySQL', 'IntelliJ IDEA'],
       learnedSkills: ['Java Swing/FX', 'SQL Queries', 'Object-Oriented Design', 'Requirements Analysis'],
-      images: [
-        'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1532938911079-1b06ac7ce122?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1551076805-e1869043e560?auto=format&fit=crop&q=80&w=800'
-      ],
+      images: [],
       link: '#',
       github: 'https://github.com/Jyne2002/Healthcare-Management-System',
       linkedin: '#'

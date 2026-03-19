@@ -86,6 +86,17 @@ const Contact = () => {
             </svg>
           </a>
         </div>
+
+        <div className="flex justify-center mb-auto mt-10">
+          <a
+            href="/resume.pdf"
+            download="Dineth_Nethsara_CV.pdf"
+            className="brutal-input brutal-shadow-btn font-bold text-lg bg-[#b2bbf0] dark:bg-[#33332d] dark:text-[#b2bbf0] dark:hover:bg-[#b2bbf0] dark:hover:text-[#33332d]  hover:bg-white hover:text-[#33332d] px-8 py-4 inline-flex items-center justify-center transition-colors"
+          >
+            Download Resume
+          </a>
+        </div>
+
       </div>
     </section>
   );
