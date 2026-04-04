@@ -34,7 +34,7 @@ const Home = () => {
         </div>
       </div>
       <div className="flex-1 flex justify-end relative mt-10 md:mt-0">
-        <img src="/my_image_lightn.png" alt="My Profile" className="w-[250px] h-[250px] md:w-[350px] md:h-[350px] object-cover bg-brutal-bg dark:bg-dark-bg border-brutal border-brutal-border dark:border-white shadow-brutal-xl dark:shadow-dark-brutal-xl rotate-6 hover:rotate-0 transition-transform duration-300" />
+        <img src="/my_image_lightn.png" alt="Dineth Nethsara - Full Stack Developer Profile Picture" className="w-[250px] h-[250px] md:w-[350px] md:h-[350px] object-cover bg-brutal-bg dark:bg-dark-bg border-brutal border-brutal-border dark:border-white shadow-brutal-xl dark:shadow-dark-brutal-xl rotate-6 hover:rotate-0 transition-transform duration-300" />
       </div>
     </section>
   );

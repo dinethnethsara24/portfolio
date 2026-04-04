@@ -156,7 +156,7 @@ const ProjectOverview = ({ project, onClose }) => {
                   >
                     <img
                       src={imgSrc}
-                      alt={`${project.title} ${idx + 1}`}
+                      alt={`${project.title} Screenshot ${idx + 1}`}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
@@ -267,7 +267,7 @@ const ProjectOverview = ({ project, onClose }) => {
                 >
                   <img
                     src={imgSrc}
-                    alt={`${project.title} - ${idx + 1}`}
+                    alt={`${project.title} Screenshot ${idx + 1}`}
                     className="w-full h-full object-contain drop-shadow-lg"
                   />
                   {!isCenter && (

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Un-comment and update the line below to provide your sitemap when ready
+# Sitemap: https://www.dineth-nethsara.dev/sitemap.xml
