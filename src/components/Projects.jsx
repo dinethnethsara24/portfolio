@@ -105,57 +105,116 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="section-container">
-      <h2 className="section-title">Featured Work</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-5">
-        {projectList.map((project, index) => (
-          <article key={index} className="hit-area-fix bg-brutal-bg dark:bg-dark-bg border-brutal border-brutal-border dark:border-white shadow-brutal-lg dark:shadow-dark-brutal-lg flex flex-col justify-between transition-all duration-200 h-full hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lg-hover dark:hover:shadow-dark-brutal-lg-hover">
+    <div id="projects">
+      {/* Desktop View */}
+      <section className="hidden md:flex section-container flex-col">
+        <h2 className="section-title">Featured Work</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-5">
+          {projectList.map((project, index) => (
+            <article key={index} className="hit-area-fix bg-brutal-bg dark:bg-dark-bg border-brutal border-brutal-border dark:border-white shadow-brutal-lg dark:shadow-dark-brutal-lg flex flex-col justify-between transition-all duration-200 h-full hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lg-hover dark:hover:shadow-dark-brutal-lg-hover">
 
-            <div className="p-8 flex-1 flex flex-col">
-              <h3 className="text-2xl font-bold mb-4 dark:text-dark-subtext">{project.title}</h3>
-              <p className="mb-6 text-gray-700 dark:text-dark-text">{project.description}</p>
+              <div className="p-8 flex-1 flex flex-col">
+                <h3 className="text-2xl font-bold mb-4 dark:text-dark-subtext">{project.title}</h3>
+                <p className="mb-6 text-gray-700 dark:text-dark-text">{project.description}</p>
 
-              <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                {project.tech.map((tech, i) => (
-                  <span key={i} className="font-mono text-xs font-bold bg-[#EEE] dark:bg-[#333] px-2 py-1 border-2 border-brutal-border dark:border-white dark:text-dark-subtext">{tech}</span>
-                ))}
+                <div className="flex flex-wrap gap-2 mb-6 mt-auto">
+                  {project.tech.map((tech, i) => (
+                    <span key={i} className="font-mono text-xs font-bold bg-[#EEE] dark:bg-[#333] px-2 py-1 border-2 border-brutal-border dark:border-white dark:text-dark-subtext">{tech}</span>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-4 mb-4 mt-auto">
+                  {typeof project.github === 'string' && (
+                    <a href={project.github} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                      Source Code
+                    </a>
+                  )}
+                  {typeof project.github === 'object' && project.github !== null && (
+                    <>
+                      {project.github.frontend && (
+                        <a href={project.github.frontend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                          Frontend
+                        </a>
+                      )}
+                      {project.github.backend && (
+                        <a href={project.github.backend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                          Backend
+                        </a>
+                      )}
+                    </>
+                  )}
+                  {project.linkedin && (
+                    <a href={project.linkedin} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                      LinkedIn
+                    </a>
+                  )}
+                </div>
               </div>
 
-              <div className="flex flex-wrap gap-4 mb-4 mt-auto">
-                {typeof project.github === 'string' && (
-                  <a href={project.github} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                    Source Code
-                  </a>
-                )}
-                {typeof project.github === 'object' && project.github !== null && (
-                  <>
-                    {project.github.frontend && (
-                      <a href={project.github.frontend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                        Frontend
-                      </a>
-                    )}
-                    {project.github.backend && (
-                      <a href={project.github.backend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                        Backend
-                      </a>
-                    )}
-                  </>
-                )}
-                {project.linkedin && (
-                  <a href={project.linkedin} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                    LinkedIn
-                  </a>
-                )}
+              <button onClick={() => setSelectedProject(project)} className="w-full block text-center p-5 font-mono font-bold uppercase border-t-brutal border-brutal-border dark:border-white bg-[#fff07c] text-brutal-text transition-colors duration-200 hover:bg-brutal-text hover:text-brutal-accent-yellow hover:no-underline cursor-pointer">
+                View Project &rarr;
+              </button>
+            </article>
+
+          ))}
+        </div>
+      </section>
+
+      {/* Mobile View */}
+      <section className="flex md:hidden section-container flex-col px-4 py-10">
+        <div className="w-full">
+          <h2 className="section-title text-[27px] text-left mb-6 pb-2">Featured Work</h2>
+        </div>
+        <div className="flex flex-col gap-[30px] mt-4 w-full">
+          {projectList.map((project, index) => (
+            <article key={index} className="hit-area-fix bg-brutal-bg dark:bg-dark-bg border-brutal border-brutal-border dark:border-white shadow-brutal-lg dark:shadow-dark-brutal-lg flex flex-col justify-between transition-all duration-200 h-full active:-translate-x-1 active:-translate-y-1 active:shadow-brutal-lg-hover dark:active:shadow-dark-brutal-lg-hover">
+
+              <div className="p-[24px] flex-1 flex flex-col">
+                <h3 className="text-[18px] font-bold mb-3 dark:text-dark-subtext">{project.title}</h3>
+                <p className="mb-[18px] text-[12px] text-gray-700 dark:text-dark-text">{project.description}</p>
+
+                <div className="flex flex-wrap gap-[6px] mb-[18px] mt-auto">
+                  {project.tech.map((tech, i) => (
+                    <span key={i} className="font-mono text-[9px] font-bold bg-[#EEE] dark:bg-[#333] px-[6px] py-[3px] border-2 border-brutal-border dark:border-white dark:text-dark-subtext">{tech}</span>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-3 mb-3 mt-auto">
+                  {typeof project.github === 'string' && (
+                    <a href={project.github} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+                      Source Code
+                    </a>
+                  )}
+                  {typeof project.github === 'object' && project.github !== null && (
+                    <>
+                      {project.github.frontend && (
+                        <a href={project.github.frontend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+                          Frontend
+                        </a>
+                      )}
+                      {project.github.backend && (
+                        <a href={project.github.backend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+                          Backend
+                        </a>
+                      )}
+                    </>
+                  )}
+                  {project.linkedin && (
+                    <a href={project.linkedin} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+                      LinkedIn
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
 
-            <button onClick={() => setSelectedProject(project)} className="w-full block text-center p-5 font-mono font-bold uppercase border-t-brutal border-brutal-border dark:border-white bg-[#fff07c] text-brutal-text transition-colors duration-200 hover:bg-brutal-text hover:text-brutal-accent-yellow hover:no-underline cursor-pointer">
-              View Project &rarr;
-            </button>
-          </article>
+              <button onClick={() => setSelectedProject(project)} className="w-full block text-center p-[15px] font-mono text-[12px] font-bold uppercase border-t-brutal border-brutal-border dark:border-white bg-[#fff07c] text-brutal-text transition-colors duration-200 active:bg-brutal-text active:text-brutal-accent-yellow active:no-underline cursor-pointer">
+                View Project &rarr;
+              </button>
+            </article>
 
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
 
       {selectedProject && (
         <ProjectOverview
@@ -163,7 +222,7 @@ const Projects = () => {
           onClose={() => setSelectedProject(null)}
         />
       )}
-    </section>
+    </div>
   );
 };
 

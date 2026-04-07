@@ -14,7 +14,7 @@ const ProjectOverview = ({ project, onClose }) => {
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] bg-brutal-bg dark:bg-dark-bg overflow-y-auto w-full h-full min-h-screen">
+    <div className="fixed inset-0 z-[120] bg-brutal-bg dark:bg-dark-bg overflow-y-auto w-full h-full min-h-screen">
       <Header onClose={onClose} />
 
       <div className="max-w-[1400px] mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12 relative pt-32">
