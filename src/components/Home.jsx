@@ -1,8 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TypeAnimation } from 'react-type-animation'
 
 
 const Home = () => {
+  useEffect(() => {
+    // Auto-scroll the page slowly
+    let scrollSpeed = 0.5; // pixels per frame
+    let animationId;
+    let isAutoScroll = true;
+
+    const autoScroll = () => {
+      if (isAutoScroll) {
+        window.scrollBy(0, scrollSpeed);
+      }
+      animationId = requestAnimationFrame(autoScroll);
+    };
+
+    // Start auto-scroll
+    animationId = requestAnimationFrame(autoScroll);
+
+    // Stop auto-scroll on user interaction
+    const handleUserInteraction = () => {
+      isAutoScroll = false;
+      document.removeEventListener('wheel', handleUserInteraction);
+      document.removeEventListener('touchmove', handleUserInteraction);
+      document.removeEventListener('keydown', handleUserInteraction);
+    };
+
+    document.addEventListener('wheel', handleUserInteraction);
+    document.addEventListener('touchmove', handleUserInteraction);
+    document.addEventListener('keydown', handleUserInteraction);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      document.removeEventListener('wheel', handleUserInteraction);
+      document.removeEventListener('touchmove', handleUserInteraction);
+      document.removeEventListener('keydown', handleUserInteraction);
+    };
+  }, []);
+
   return (
     <div id="home">
       {/* Desktop View */}
@@ -20,6 +56,10 @@ const Home = () => {
                 'a Full Stack Developer',
                 2000,
                 'an AI/ML Enthusiast',
+                2000,
+                'a QA Engineer',
+                2000,
+                'a DevOps Enthusiast',
                 2000,
               ]}
               wrapper="span"
@@ -53,7 +93,7 @@ const Home = () => {
                 2000,
                 'A Full Stack Developer',
                 2000,
-                'An AI/ML Enthusiast',
+                'A DevOps Enthusiast',
                 2000,
               ]}
               wrapper="span"

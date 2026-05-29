@@ -82,18 +82,6 @@ const ProjectOverview = ({ project, onClose }) => {
             )}
           </div>
 
-          {/* Skills Gained */}
-          <h3 className="font-mono text-2xl font-bold mb-5 text-brutal-text dark:text-dark-text border-b-[3px] border-brutal-border dark:border-white pb-2 w-fit pr-6">
-            Skills Gained
-          </h3>
-          <div className="flex flex-wrap gap-3 mb-12">
-            {(project.learnedSkills || project.tech).map((skill, idx) => (
-              <span key={idx} className="font-mono text-sm md:text-base font-bold bg-[#fff07c] dark:bg-[#444] border-[3px] border-brutal-border dark:border-white px-4 py-2 text-brutal-text dark:text-dark-text transition-colors cursor-default">
-                {skill}
-              </span>
-            ))}
-          </div>
-
           {/* Action Buttons */}
           <h3 className="font-mono text-2xl font-bold mb-5 text-brutal-text dark:text-dark-text border-b-[3px] border-brutal-border dark:border-white pb-2 w-fit pr-6">
             Links
@@ -131,7 +119,21 @@ const ProjectOverview = ({ project, onClose }) => {
                 LinkedIn
               </a>
             )}
+          </div>          
+
+          {/* Skills Gained */}
+          <h3 className="font-mono text-2xl font-bold mb-5 text-brutal-text dark:text-dark-text border-b-[3px] border-brutal-border dark:border-white pb-2 w-fit pr-6">
+            Skills Gained
+          </h3>
+          <div className="flex flex-wrap gap-3 mb-12">
+            {(project.learnedSkills || project.tech).map((skill, idx) => (
+              <span key={idx} className="font-mono text-sm md:text-base font-bold bg-[#fff07c] dark:bg-[#444] border-[3px] border-brutal-border dark:border-white px-4 py-2 text-brutal-text dark:text-dark-text transition-colors cursor-default">
+                {skill}
+              </span>
+            ))}
           </div>
+
+
         </div>
 
         {/* Bento Grid Media Section */}

@@ -101,62 +101,131 @@ const Projects = () => {
       link: '#',
       github: 'https://github.com/Jyne2002/Healthcare-Management-System',
       linkedin: '#'
+    },
+    {
+      title: 'DevOps Pipeline',
+      description: 'End-to-end CI/CD pipeline with Docker, Terraform, and GitHub Actions.',
+      detailedDescription: (
+        <>
+          <p className="mb-4">
+            Built a complete CI/CD pipeline for containerized <b className='text-gray-500'>ASP.NET Core API</b> deployment to <b className='text-gray-500'>AWS EC2</b>.
+          </p>
+          <p className="mb-2 italic opacity-80">Key achievements:</p>
+          <ul className="list-disc list-inside space-y-2 ml-2">
+            <li>Containerized ASP.NET Core REST API using <b className='text-gray-500'>Docker</b> with multi-stage builds.</li>
+            <li>Provisioned AWS infrastructure as code using <b className='text-gray-500'>Terraform</b> (VPCs, EC2, security groups).</li>
+            <li>Automated build, test, and deployment pipeline with <b className='text-gray-500'>GitHub Actions</b>.</li>
+            <li>Pushed Docker images to <b className='text-gray-500'>Docker Hub</b> registry for container orchestration.</li>
+            <li>Debugged container networking and deployment issues ensuring zero-downtime releases.</li>
+            <li>Implemented infrastructure version control and repeatable deployment workflows.</li>
+          </ul>
+        </>
+      ),
+      tech: ['Docker', 'Terraform', 'GitHub Actions' ],
+      learnedSkills: ['AWS','Infrastructure as Code', 'CI/CD Automation', 'Cloud Deployment', 'Container Orchestration', 'DevOps Best Practices', 'ASP.NET Core'],
+      images: [],
+      link: '#',
+      github: 'https://github.com/dinethnethsara24/taskmanager-devops',
+      linkedin: 'https://www.linkedin.com/posts/dineth-peiris-dev_devops-docker-terraform-activity-7459229348919812097-OuAB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFcBB3wBbq03ai8JA9aNgakEl9I-66pcXpk'
     }
   ];
 
+  // Duplicate the array for seamless infinite scroll
+  const duplicatedProjects = [...projectList, ...projectList];
+
+  const ProjectCard = ({ project }) => (
+    <article className="hit-area-fix bg-brutal-bg dark:bg-dark-bg border-brutal border-brutal-border dark:border-white shadow-brutal-lg dark:shadow-dark-brutal-lg flex flex-col justify-between transition-all duration-200 h-full hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lg-hover dark:hover:shadow-dark-brutal-lg-hover flex-shrink-0 w-[350px]">
+
+      <div className="p-8 flex-1 flex flex-col">
+        <h3 className="text-2xl font-bold mb-4 dark:text-dark-subtext">{project.title}</h3>
+        <p className="mb-6 text-gray-700 dark:text-dark-text">{project.description}</p>
+
+        <div className="flex flex-wrap gap-2 mb-6 mt-auto">
+          {project.tech.map((tech, i) => (
+            <span key={i} className="font-mono text-xs font-bold bg-[#EEE] dark:bg-[#333] px-2 py-1 border-2 border-brutal-border dark:border-white dark:text-dark-subtext">{tech}</span>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-4 mb-4 mt-auto">
+          {typeof project.github === 'string' && (
+            <a href={project.github} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+              Source Code
+            </a>
+          )}
+          {typeof project.github === 'object' && project.github !== null && (
+            <>
+              {project.github.frontend && (
+                <a href={project.github.frontend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                  Frontend
+                </a>
+              )}
+              {project.github.backend && (
+                <a href={project.github.backend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                  Backend
+                </a>
+              )}
+            </>
+          )}
+          {project.linkedin && (
+            <a href={project.linkedin} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+              LinkedIn
+            </a>
+          )}
+        </div>
+      </div>
+
+      <button onClick={() => setSelectedProject(project)} className="w-full block text-center p-5 font-mono font-bold uppercase border-t-brutal border-brutal-border dark:border-white bg-[#fff07c] text-brutal-text transition-colors duration-200 hover:bg-brutal-text hover:text-brutal-accent-yellow hover:no-underline cursor-pointer">
+        View Project &rarr;
+      </button>
+    </article>
+  );
+
   return (
     <div id="projects">
-      {/* Desktop View */}
+      {/* Desktop Marquee View */}
       <section className="hidden md:flex section-container flex-col">
         <h2 className="section-title">Featured Work</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-5">
-          {projectList.map((project, index) => (
-            <article key={index} className="hit-area-fix bg-brutal-bg dark:bg-dark-bg border-brutal border-brutal-border dark:border-white shadow-brutal-lg dark:shadow-dark-brutal-lg flex flex-col justify-between transition-all duration-200 h-full hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lg-hover dark:hover:shadow-dark-brutal-lg-hover">
+        
+        <style>{`
+          @keyframes marquee {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(calc(-350px * ${projectList.length} - 40px * ${projectList.length}));
+            }
+          }
+          
+          .marquee-container {
+            overflow: hidden;
+            border-t-4 border-b-4 border-brutal-border;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+          }
 
-              <div className="p-8 flex-1 flex flex-col">
-                <h3 className="text-2xl font-bold mb-4 dark:text-dark-subtext">{project.title}</h3>
-                <p className="mb-6 text-gray-700 dark:text-dark-text">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                  {project.tech.map((tech, i) => (
-                    <span key={i} className="font-mono text-xs font-bold bg-[#EEE] dark:bg-[#333] px-2 py-1 border-2 border-brutal-border dark:border-white dark:text-dark-subtext">{tech}</span>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-4 mb-4 mt-auto">
-                  {typeof project.github === 'string' && (
-                    <a href={project.github} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                      Source Code
-                    </a>
-                  )}
-                  {typeof project.github === 'object' && project.github !== null && (
-                    <>
-                      {project.github.frontend && (
-                        <a href={project.github.frontend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                          Frontend
-                        </a>
-                      )}
-                      {project.github.backend && (
-                        <a href={project.github.backend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                          Backend
-                        </a>
-                      )}
-                    </>
-                  )}
-                  {project.linkedin && (
-                    <a href={project.linkedin} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-xs text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-3 py-2 border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                      LinkedIn
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              <button onClick={() => setSelectedProject(project)} className="w-full block text-center p-5 font-mono font-bold uppercase border-t-brutal border-brutal-border dark:border-white bg-[#fff07c] text-brutal-text transition-colors duration-200 hover:bg-brutal-text hover:text-brutal-accent-yellow hover:no-underline cursor-pointer">
-                View Project &rarr;
-              </button>
-            </article>
-
-          ))}
+          .dark .marquee-container {
+            border-t-4 border-b-4 border-white;
+          }
+          
+          .marquee-track {
+            display: flex;
+            gap: 40px;
+            animation: marquee 60s linear infinite;
+            width: fit-content;
+          }
+          
+          .marquee-track:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+        
+        <div className="marquee-container mt-5">
+          <div className="marquee-track">
+            {duplicatedProjects.map((project, index) => (
+              <ProjectCard key={index} project={project} />
+            ))}
+          </div>
         </div>
       </section>
 

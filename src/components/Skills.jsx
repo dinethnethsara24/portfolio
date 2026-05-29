@@ -13,7 +13,7 @@ const Skills = () => {
           <path d="M6 21h12" />
         </svg>
       ),
-      skills: ['JavaScript (ES6+)', 'PHP', 'Java', 'C++', 'HTML5', 'CSS3']
+      skills: ['JavaScript (ES6+)', 'Java', 'C#', 'PHP', 'C++', 'Python']
     },
     {
       title: 'Frontend & UI',
@@ -27,7 +27,7 @@ const Skills = () => {
           <rect x="13" y="13" width="4" height="4" />
         </svg>
       ),
-      skills: ['React.js', 'Vite', 'Tailwind CSS', 'Bootstrap', 'Figma']
+      skills: ['React.js', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite']
     },
     {
       title: 'Backend & Logic',
@@ -43,7 +43,7 @@ const Skills = () => {
           <circle cx="22" cy="12" r="2" />
         </svg>
       ),
-      skills: ['Node.js', 'Express.js', 'RESTful APIs']
+      skills: ['Node.js', 'Express.js', 'ASP.NET Core', 'REST APIs', 'JWT Auth']
     },
     {
       title: 'Database & Storage',
@@ -56,10 +56,10 @@ const Skills = () => {
           <path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" />
         </svg>
       ),
-      skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Supabase', 'Firebase']
+      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Supabase', 'JDBC']
     },
     {
-      title: 'DevOps & Tools',
+      title: 'DevOps & Cloud',
       hoverBgColor: 'hover:bg-[#fff07c]',
       activeBgColor: 'active:bg-[#fff07c]',
       icon: (
@@ -69,7 +69,19 @@ const Skills = () => {
           <path d="M12 7v15" />
         </svg>
       ),
-      skills: ['Git & GitHub', 'IntelliJ IDEA', 'Power BI', 'Vercel', 'Postman', 'RStudio']
+      skills: ['Docker', 'Terraform', 'GitHub Actions', 'AWS EC2', 'Vercel', 'CI/CD']
+    },
+    {
+      title: 'Testing & Tools',
+      hoverBgColor: 'hover:bg-[#b2bbf0]',
+      activeBgColor: 'active:bg-[#b2bbf0]',
+      icon: (
+        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 12l2 2 4-4" />
+          <circle cx="12" cy="12" r="9" />
+        </svg>
+      ),
+      skills: ['Selenium WebDriver', 'Postman', 'Git & GitHub', 'Agile', 'Linux']
     }
   ];
 
