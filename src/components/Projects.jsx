@@ -200,6 +200,8 @@ const Projects = () => {
             overflow: hidden;
             border-t-4 border-b-4 border-brutal-border;
             position: relative;
+            padding-top: 8px;
+            padding-bottom: 8px;
             mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
           }
