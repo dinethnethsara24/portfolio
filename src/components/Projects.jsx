@@ -133,6 +133,108 @@ const Projects = () => {
   // Duplicate the array for seamless infinite scroll
   const duplicatedProjects = [...projectList, ...projectList];
 
+  const CarouselMobile = ({ projectList, setSelectedProject }) => {
+    const carouselRef = React.useRef(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const cardWidth = 340; // max-width of card
+
+    const handleScroll = () => {
+      if (carouselRef.current) {
+        const scrollLeft = carouselRef.current.scrollLeft;
+        const index = Math.round(scrollLeft / cardWidth);
+        setActiveIndex(Math.min(index, projectList.length - 1));
+      }
+    };
+
+    const scrollToIndex = (index) => {
+      if (carouselRef.current) {
+        carouselRef.current.scrollTo({
+          left: index * cardWidth,
+          behavior: 'smooth'
+        });
+        setActiveIndex(index);
+      }
+    };
+
+    return (
+      <div className="flex flex-col gap-4 px-4 py-6">
+        {/* Carousel */}
+        <div
+          ref={carouselRef}
+          onScroll={handleScroll}
+          className="carousel-container flex flex-row gap-6 overflow-x-auto scroll-snap-type-x-mandatory px-1"
+          style={{ minHeight: '420px' }}
+        >
+          {projectList.map((project, index) => (
+            <article
+              key={index}
+              className="hit-area-fix bg-brutal-bg dark:bg-dark-bg border-brutal border-brutal-border dark:border-white shadow-brutal-lg dark:shadow-dark-brutal-lg flex flex-col justify-between transition-all duration-200 h-full active:-translate-x-1 active:-translate-y-1 active:shadow-brutal-lg-hover dark:active:shadow-dark-brutal-lg-hover scroll-snap-align-start flex-shrink-0"
+              style={{ width: '85vw', maxWidth: '340px' }}
+            >
+              <div className="p-[24px] flex-1 flex flex-col">
+                <h3 className="text-[18px] font-bold mb-3 dark:text-dark-subtext">{project.title}</h3>
+                <p className="mb-[18px] text-[12px] text-gray-700 dark:text-dark-text">{project.description}</p>
+
+                <div className="flex flex-wrap gap-[6px] mb-[18px] mt-auto">
+                  {project.tech.map((tech, i) => (
+                    <span key={i} className="font-mono text-[9px] font-bold bg-[#EEE] dark:bg-[#333] px-[6px] py-[3px] border-2 border-brutal-border dark:border-white dark:text-dark-subtext">{tech}</span>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-3 mb-3 mt-auto">
+                  {typeof project.github === 'string' && (
+                    <a href={project.github} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+                      Source Code
+                    </a>
+                  )}
+                  {typeof project.github === 'object' && project.github !== null && (
+                    <>
+                      {project.github.frontend && (
+                        <a href={project.github.frontend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+                          Frontend
+                        </a>
+                      )}
+                      {project.github.backend && (
+                        <a href={project.github.backend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+                          Backend
+                        </a>
+                      )}
+                    </>
+                  )}
+                  {project.linkedin && (
+                    <a href={project.linkedin} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+                      LinkedIn
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <button onClick={() => setSelectedProject(project)} className="w-full block text-center p-[15px] font-mono text-[12px] font-bold uppercase border-t-brutal border-brutal-border dark:border-white bg-[#fff07c] text-brutal-text transition-colors duration-200 active:bg-brutal-text active:text-brutal-accent-yellow active:no-underline cursor-pointer">
+                View Project &rarr;
+              </button>
+            </article>
+          ))}
+        </div>
+
+        {/* Dot Indicators */}
+        <div className="flex justify-center gap-2 mt-4 pb-2">
+          {projectList.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollToIndex(index)}
+              className={`w-2 h-2 rounded-full border-2 transition-all ${
+                index === activeIndex
+                  ? 'bg-[#fff07c] border-brutal-border'
+                  : 'bg-transparent border-brutal-border'
+              }`}
+              aria-label={`Go to project ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   const ProjectCard = ({ project }) => (
     <article className="hit-area-fix bg-brutal-bg dark:bg-dark-bg border-brutal border-brutal-border dark:border-white shadow-brutal-lg dark:shadow-dark-brutal-lg flex flex-col justify-between transition-all duration-200 h-full hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lg-hover dark:hover:shadow-dark-brutal-lg-hover flex-shrink-0 w-[350px]">
 
@@ -232,59 +334,22 @@ const Projects = () => {
       </section>
 
       {/* Mobile View */}
-      <section className="flex md:hidden section-container flex-col px-4 py-10">
-        <div className="w-full">
+      <section className="flex md:hidden section-container flex-col px-0 py-10">
+        <div className="w-full px-4">
           <h2 className="section-title text-[27px] text-left mb-6 pb-2">Featured Work</h2>
         </div>
-        <div className="flex flex-col gap-[30px] mt-4 w-full">
-          {projectList.map((project, index) => (
-            <article key={index} className="hit-area-fix bg-brutal-bg dark:bg-dark-bg border-brutal border-brutal-border dark:border-white shadow-brutal-lg dark:shadow-dark-brutal-lg flex flex-col justify-between transition-all duration-200 h-full active:-translate-x-1 active:-translate-y-1 active:shadow-brutal-lg-hover dark:active:shadow-dark-brutal-lg-hover">
+        
+        <style>{`
+          .carousel-container {
+            scrollbar-width: none;
+          }
+          
+          .carousel-container::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
 
-              <div className="p-[24px] flex-1 flex flex-col">
-                <h3 className="text-[18px] font-bold mb-3 dark:text-dark-subtext">{project.title}</h3>
-                <p className="mb-[18px] text-[12px] text-gray-700 dark:text-dark-text">{project.description}</p>
-
-                <div className="flex flex-wrap gap-[6px] mb-[18px] mt-auto">
-                  {project.tech.map((tech, i) => (
-                    <span key={i} className="font-mono text-[9px] font-bold bg-[#EEE] dark:bg-[#333] px-[6px] py-[3px] border-2 border-brutal-border dark:border-white dark:text-dark-subtext">{tech}</span>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-3 mb-3 mt-auto">
-                  {typeof project.github === 'string' && (
-                    <a href={project.github} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
-                      Source Code
-                    </a>
-                  )}
-                  {typeof project.github === 'object' && project.github !== null && (
-                    <>
-                      {project.github.frontend && (
-                        <a href={project.github.frontend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
-                          Frontend
-                        </a>
-                      )}
-                      {project.github.backend && (
-                        <a href={project.github.backend} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
-                          Backend
-                        </a>
-                      )}
-                    </>
-                  )}
-                  {project.linkedin && (
-                    <a href={project.linkedin} target="_blank" rel="noreferrer" className="hit-area-fix flex-1 font-mono text-[9px] text-center font-bold bg-white dark:bg-[#222] text-brutal-text dark:text-white px-[9px] py-[6px] border-2 border-brutal-border dark:border-white shadow-brutal-sm dark:shadow-dark-brutal-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
-                      LinkedIn
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              <button onClick={() => setSelectedProject(project)} className="w-full block text-center p-[15px] font-mono text-[12px] font-bold uppercase border-t-brutal border-brutal-border dark:border-white bg-[#fff07c] text-brutal-text transition-colors duration-200 active:bg-brutal-text active:text-brutal-accent-yellow active:no-underline cursor-pointer">
-                View Project &rarr;
-              </button>
-            </article>
-
-          ))}
-        </div>
+        <CarouselMobile projectList={projectList} setSelectedProject={setSelectedProject} />
       </section>
 
       {selectedProject && (
